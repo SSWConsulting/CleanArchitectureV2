@@ -5,17 +5,15 @@ using WebApi.IntegrationTests.Common.Fixtures;
 
 namespace WebApi.IntegrationTests.Endpoints.Heroes.Queries;
 
-public class GetAllHeroesQueryTests(TestingDatabaseFixture fixture, ITestOutputHelper output)
-    : IntegrationTestBase(fixture, output)
+public class GetAllHeroesQueryTests : IntegrationTestBaseV2
 {
-    [Fact]
+    [Test]
     public async Task Query_ShouldReturnAllHeroes()
     {
         // Arrange
         const int entityCount = 10;
         var entities = HeroFactory.Generate(entityCount);
-        await Context.Heroes.AddRangeAsync(entities);
-        await Context.SaveChangesAsync();
+        await AddRangeAsync(entities);
         var client = GetAnonymousClient();
 
         // Act

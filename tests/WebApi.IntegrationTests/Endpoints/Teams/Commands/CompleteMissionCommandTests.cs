@@ -7,10 +7,9 @@ using WebApi.IntegrationTests.Common.Fixtures;
 
 namespace WebApi.IntegrationTests.Endpoints.Teams.Commands;
 
-public class CompleteMissionCommandTests(TestingDatabaseFixture fixture, ITestOutputHelper output)
-    : IntegrationTestBase(fixture, output)
+public class CompleteMissionCommandTests : IntegrationTestBaseV2
 {
-    [Fact]
+    [Test]
     public async Task Command_ShouldCompleteMission()
     {
         // Arrange
@@ -18,8 +17,8 @@ public class CompleteMissionCommandTests(TestingDatabaseFixture fixture, ITestOu
         var team = TeamFactory.Generate();
         team.AddHero(hero);
         team.ExecuteMission("Save the world");
-        Context.Teams.Add(team);
-        await Context.SaveChangesAsync();
+        await AddAsync(team);
+        // await Context.SaveChangesAsync();
         var teamId = team.Id.Value;
         var client = GetAnonymousClient();
 

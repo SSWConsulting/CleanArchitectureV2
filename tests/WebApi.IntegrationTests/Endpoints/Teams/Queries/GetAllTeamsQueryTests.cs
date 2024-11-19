@@ -5,17 +5,16 @@ using WebApi.IntegrationTests.Common.Fixtures;
 
 namespace WebApi.IntegrationTests.Endpoints.Teams.Queries;
 
-public class GetAllTeamsQueryTests(TestingDatabaseFixture fixture, ITestOutputHelper output)
-    : IntegrationTestBase(fixture, output)
+public class GetAllTeamsQueryTests : IntegrationTestBaseV2
 {
-    [Fact]
+    [Test]
     public async Task Query_ShouldReturnAllTeams()
     {
         // Arrange
         const int entityCount = 10;
         var entities = TeamFactory.Generate(entityCount);
-        await Context.Teams.AddRangeAsync(entities);
-        await Context.SaveChangesAsync();
+        await AddRangeAsync(entities);
+        // await Context.SaveChangesAsync();
         var client = GetAnonymousClient();
 
         // Act

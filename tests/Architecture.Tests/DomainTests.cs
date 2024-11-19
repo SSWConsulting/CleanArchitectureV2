@@ -13,7 +13,7 @@ public class DomainModel(ITestOutputHelper output) : TestBase
     private static readonly Type DomainEvent = typeof(IDomainEvent);
     private static readonly Type ValueObject = typeof(IValueObject);
 
-    [Fact]
+    [Test]
     public void DomainModel_ShouldInheritsBaseClasses()
     {
         // Arrange
@@ -42,7 +42,7 @@ public class DomainModel(ITestOutputHelper output) : TestBase
         result.Should().BeSuccessful();
     }
 
-    [Fact]
+    [Test]
     public void EntitiesAndAggregates_ShouldHavePrivateParameterlessConstructor()
     {
         var entityTypes = Types.InAssembly(DomainAssembly)
